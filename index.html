@@ -60,20 +60,26 @@
         return basisPreis;
     }
 
-    function oeffneBriefkasten() {
+        function oeffneBriefkasten() {
         let groesseText = document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
         let farbeText = document.getElementById("color").options[document.getElementById("color").selectedIndex].text;
-        let preis = berechnePreis();
+        
+        // 1. Berechnet den reinen Zahlenwert (z.B. 8.5)
+        let reinerPreis = berechnePreis(); 
+        
+        // 2. Macht daraus Text mit Komma und Euro-Zeichen (z.B. "8,50 €")
+        let formatierterPreis = reinerPreis.toFixed(2).replace(".", ",") + " €";
 
-        // Verpackt die Werte sicher für den Link
+        // 3. Verpackt die Werte sicher für den Link
         let prefillUrl = SEATABLE_FORM_URL + 
                          "?prefill_Größe=" + encodeURIComponent(groesseText) + 
                          "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
-                         "&prefill_Preis=" + preis;
+                         "&prefill_Preis=" + encodeURIComponent(formatierterPreis);
 
         // Öffnet das Formular perfekt ausgefüllt in einem neuen Browser-Tab
         window.open(prefillUrl, '_blank');
     }
+
 </script>
 
 
