@@ -5,27 +5,32 @@
     <title>Mein Oktopus-Shop</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; padding: 20px; }
-        .card { background: white; max-width: 400px; margin: auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
+        .card { background: white; max-width: 450px; margin: auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
         h1 { color: #0077b6; }
         .price-tag { font-size: 24px; font-weight: bold; color: #00b4d8; margin: 15px 0; }
+        button { width: 100%; padding: 12px; background: #0077b6; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #005f91; }
+        
+        /* Container für das sichere SeaTable-Formular */
+        #briefkasten-container { display: none; margin-top: 20px; border-top: 2px dashed #00b4d8; padding-top: 15px; }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <div class="card">
         <h1>🐙 Oktopus-Konfigurator</h1>
-        
         <p>Stelle dir deinen beweglichen Oktopus zusammen!</p>
         
-        <label for="size">Größe wählen:</label>
+        <label for="size" style="display:block; text-align:left;">Größe wählen:</label>
         <select id="size" onchange="berechnePreis()">
             <option value="klein">Klein (Basis) - 5,00 €</option>
             <option value="mittel">Mittel (+ 2,00 €)</option>
             <option value="riesig">Riesig (+ 5,00 €)</option>
         </select>
 
-        <label for="color">Farbe & Filament-Typ:</label>
+        <label for="color" style="display:block; text-align:left;">Farbe & Filament-Typ:</label>
         <select id="color" onchange="berechnePreis()">
             <option value="standard">Standard-Farbe (Rot, Blau, Grün)</option>
             <option value="special">Spezial-Filament (Regenbogen / Glow-in-the-dark) (+ 1,50 €)</option>
@@ -33,32 +38,43 @@
 
         <div class="price-tag">Preis: <span id="finaler-preis">5,00</span> €</div>
         
-        <button onclick="bestellungAbschicken()">Jetzt bestellen</button>
+        <button id="btn-bestellen" onclick="oeffneBriefkasten()">Auswahl bestätigen & Kontaktdaten eingeben</button>
+
+        <!-- Das eingebettete SeaTable-Formular -->
+        <div id="briefkasten-container">
+            <iframe id="seatable-form" src=""></iframe>
+        </div>
     </div>
 
     <script>
+        // ⚠️ WICHTIG: Ersetzen Sie den Link unten mit Ihrem echten SeaTable-Formular-Link!
+        const SEATABLE_FORM_URL = "https://cloud.seatable.io/dtable/forms/41ba1ebb-59fb-4971-8133-2e7e09c6d4e7/";
+
         function berechnePreis() {
             let basisPreis = 5.00;
-            
-            let gewaehlteGroesse = document.getElementById("size").value;
-            let gewaehlteFarbe = document.getElementById("color").value;
+            if (document.getElementById("size").value === "mittel") basisPreis += 2.00;
+            if (document.getElementById("size").value === "riesig") basisPreis += 5.00;
+            if (document.getElementById("color").value === "special") basisPreis += 1.50;
 
-            if (gewaehlteGroesse === "mittel") {
-                basisPreis = basisPreis + 2.00;
-            } else if (gewaehlteGroesse === "riesig") {
-                basisPreis = basisPreis + 5.00;
-            }
-
-            if (gewaehlteFarbe === "special") {
-                basisPreis = basisPreis + 1.50;
-            }
-
-            let formatierterPreis = basisPreis.toFixed(2).replace(".", ",");
-            document.getElementById("finaler-preis").innerText = formatierterPreis;
+            document.getElementById("finaler-preis").innerText = basisPreis.toFixed(2).replace(".", ",");
+            return basisPreis;
         }
 
-        function bestellungAbschicken() {
-            alert("Danke für deine Test-Bestellung! Dein Oktopus wird bald gedruckt. 🐙");
+        function oeffneBriefkasten() {
+            let groesseText = document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
+            let farbeText = document.getElementById("color").options[document.getElementById("color").selectedIndex].text;
+            let preis = berechnePreis();
+
+            // Verpackt die Werte sicher für die URL (Umlaute/Leerzeichen werden maskiert)
+            let prefillUrl = SEATABLE_FORM_URL + 
+                             "?prefill_Größe=" + encodeURIComponent(groesseText) + 
+                             "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
+                             "&prefill_Preis=" + preis;
+
+            // Setzt den Link in das iframe-Fenster ein und zeigt es an
+            document.getElementById("seatable-form").src = prefillUrl;
+            document.getElementById("btn-bestellen").style.display = "none";
+            document.getElementById("briefkasten-container").style.display = "block";
         }
     </script>
 
