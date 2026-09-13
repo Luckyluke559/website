@@ -47,36 +47,35 @@
     </div>
 
     <script>
-        // ⚠️ WICHTIG: Ersetzen Sie den Link unten mit Ihrem echten SeaTable-Formular-Link!
-        const SEATABLE_FORM_URL = "https://cloud.seatable.io/dtable/forms/41ba1ebb-59fb-4971-8133-2e7e09c6d4e7/";
+    // Ihr exakter, sauberer Formular-Link ohne "dtable"
+    const SEATABLE_FORM_URL = "https://seatable.io";
 
-        function berechnePreis() {
-            let basisPreis = 5.00;
-            if (document.getElementById("size").value === "mittel") basisPreis += 2.00;
-            if (document.getElementById("size").value === "riesig") basisPreis += 5.00;
-            if (document.getElementById("color").value === "special") basisPreis += 1.50;
+    function berechnePreis() {
+        let basisPreis = 5.00;
+        if (document.getElementById("size").value === "mittel") basisPreis += 2.00;
+        if (document.getElementById("size").value === "riesig") basisPreis += 5.00;
+        if (document.getElementById("color").value === "special") basisPreis += 1.50;
 
-            document.getElementById("finaler-preis").innerText = basisPreis.toFixed(2).replace(".", ",");
-            return basisPreis;
-        }
+        document.getElementById("finaler-preis").innerText = basisPreis.toFixed(2).replace(".", ",");
+        return basisPreis;
+    }
 
-        function oeffneBriefkasten() {
-            let groesseText = document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
-            let farbeText = document.getElementById("color").options[document.getElementById("color").selectedIndex].text;
-            let preis = berechnePreis();
+    function oeffneBriefkasten() {
+        let groesseText = document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
+        let farbeText = document.getElementById("color").options[document.getElementById("color").selectedIndex].text;
+        let preis = berechnePreis();
 
-            // Verpackt die Werte sicher für die URL (Umlaute/Leerzeichen werden maskiert)
-            let prefillUrl = SEATABLE_FORM_URL + 
-                             "?prefill_Größe=" + encodeURIComponent(groesseText) + 
-                             "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
-                             "&prefill_Preis=" + preis;
+        // Verpackt die Werte sicher für den Link
+        let prefillUrl = SEATABLE_FORM_URL + 
+                         "?prefill_Größe=" + encodeURIComponent(groesseText) + 
+                         "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
+                         "&prefill_Preis=" + preis;
 
-            // Setzt den Link in das iframe-Fenster ein und zeigt es an
-            document.getElementById("seatable-form").src = prefillUrl;
-            document.getElementById("btn-bestellen").style.display = "none";
-            document.getElementById("briefkasten-container").style.display = "block";
-        }
-    </script>
+        // Öffnet das Formular perfekt ausgefüllt in einem neuen Browser-Tab
+        window.open(prefillUrl, '_blank');
+    }
+</script>
+
 
 </body>
 </html>
