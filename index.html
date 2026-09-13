@@ -31,7 +31,6 @@
             <option value="special">Spezial-Filament (Regenbogen / Glow-in-the-dark) (+ 1,50 €)</option>
         </select>
 
-        <!-- Hier jetzt standardmäßig ein Komma -->
         <div class="price-tag">Preis: <span id="finaler-preis">5,00</span> €</div>
         
         <button onclick="bestellungAbschicken()">Jetzt bestellen</button>
@@ -54,7 +53,6 @@
                 basisPreis = basisPreis + 1.50;
             }
 
-            // .replace(".", ",") tauscht den Punkt aus der Berechnung gegen ein deutsches Komma aus
             let formatierterPreis = basisPreis.toFixed(2).replace(".", ",");
             document.getElementById("finaler-preis").innerText = formatierterPreis;
         }
