@@ -7,7 +7,7 @@ body {
 
 .card {
     background: white;
-    max-width: 450px;
+    max-width: 900px;
     margin: auto;
     padding: 20px;
     border-radius: 15px;
@@ -25,20 +25,20 @@ select {
 }
 
 h1 {
-    color: #0077b6;
+    color: orange;
 }
 
 .price-tag {
     font-size: 24px;
     font-weight: bold;
-    color: #00b4d8;
+    color: orange;
     margin: 15px 0;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background: #0077b6;
+    background: orange;
     color: white;
     border: none;
     border-radius: 5px;
@@ -48,7 +48,7 @@ button {
 }
 
     button:hover {
-        background: #005f91;
+        background: #FFB733;
     }
 
 /* Container für das sichere SeaTable-Formular */
@@ -64,14 +64,4 @@ iframe {
     height: 600px;
     border: none;
     border-radius: 8px;
-}
-
-#btn-oktopus {
-    background-color: orange;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Mein Oktopus-Shop</title>
+    <link rel="stylesheet" href="styles/oktopus.css">
+</head>
+<body>
+
+    <div class="card">
+        <h1>🐙 Oktopus-Konfigurator</h1>
+        <p>Stelle dir deinen beweglichen Oktopus zusammen!</p>
+
+        <label for="size" style="display:block; text-align:left;">Größe wählen:</label>
+        <select id="size" onchange="berechnePreis()">
+            <option value="klein">Klein (Basis) - 5,00 €</option>
+            <option value="mittel">Mittel (+ 2,00 €)</option>
+            <option value="riesig">Riesig (+ 5,00 €)</option>
+        </select>
+
+        <label for="color" style="display:block; text-align:left;">Farbe:</label>
+        <select id="color" onchange="berechnePreis()">
+            <option value="black">Schwarz</option>
+            <option value="white">Weiß</option>
+            <option value="red">Rot</option>
+        </select>
+
+        <label for="deliverytime" style="display:block; text-align:left;">Lieferzeit:</label>
+        <select id="deliverytime" onchange="berechnePreis()">
+            <option value="normal">Normal (3-5 Werktage)</option>
+            <option value="express">Express (1-2 Werktage) (+ 3,00 €)</option>
+        </select>
+
+        <div class="price-tag">Preis: <span id="finaler-preis">5,00</span> €</div>
+
+        <button id="btn-bestellen" onclick="oeffneBriefkasten()">Auswahl bestätigen & Kontaktdaten eingeben</button>
+
+        <!-- Das eingebettete SeaTable-Formular -->
+        <div id="briefkasten-container">
+            <iframe id="seatable-form" src=""></iframe>
+        </div>
+    </div>
+
+    <script src="scripts/oktopus.js"></script>
+
+
+</body>
+</html>
