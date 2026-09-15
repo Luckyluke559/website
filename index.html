@@ -3,19 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mein Oktopus-Shop</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; padding: 20px; }
-        .card { background: white; max-width: 450px; margin: auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        select { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; box-sizing: border-box; }
-        h1 { color: #0077b6; }
-        .price-tag { font-size: 24px; font-weight: bold; color: #00b4d8; margin: 15px 0; }
-        button { width: 100%; padding: 12px; background: #0077b6; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #005f91; }
-        
-        /* Container für das sichere SeaTable-Formular */
-        #briefkasten-container { display: none; margin-top: 20px; border-top: 2px dashed #00b4d8; padding-top: 15px; }
-        iframe { width: 100%; height: 600px; border: none; border-radius: 8px; }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
@@ -36,6 +24,12 @@
             <option value="special">Spezial-Filament (Regenbogen / Glow-in-the-dark) (+ 1,50 €)</option>
         </select>
 
+        <label for="deliverytime" style="display:block; text-align:left;">Lieferzeit:</label>
+        <select id="deliverytime" onchange="berechnePreis()">
+            <option value="normal">Normal (3-5 Werktage)</option>
+            <option value="express">Express (1-2 Werktage) (+ 3,00 €)</option>
+        </select>
+
         <div class="price-tag">Preis: <span id="finaler-preis">5,00</span> €</div>
         
         <button id="btn-bestellen" onclick="oeffneBriefkasten()">Auswahl bestätigen & Kontaktdaten eingeben</button>
@@ -46,42 +40,8 @@
         </div>
     </div>
 
-    <script>
-    // Ihr exakter, sauberer Formular-Link ohne "dtable"
-    const SEATABLE_FORM_URL = "https://cloud.seatable.io/dtable/forms/41ba1ebb-59fb-4971-8133-2e7e09c6d4e7/";
+    <script src="scripts/main.js"></script>
 
-    function berechnePreis() {
-        let basisPreis = 5.00;
-        if (document.getElementById("size").value === "mittel") basisPreis += 2.00;
-        if (document.getElementById("size").value === "riesig") basisPreis += 5.00;
-        if (document.getElementById("color").value === "special") basisPreis += 1.50;
-
-        document.getElementById("finaler-preis").innerText = basisPreis.toFixed(2).replace(".", ",");
-        return basisPreis;
-    }
-
-        function oeffneBriefkasten() {
-        let groesseText = document.getElementById("size").options[document.getElementById("size").selectedIndex].text;
-        let farbeText = document.getElementById("color").options[document.getElementById("color").selectedIndex].text;
-        
-        // 1. Berechnet den reinen Zahlenwert (z.B. 8.5)
-        let reinerPreis = berechnePreis(); 
-        
-        // 2. Macht daraus Text mit Komma und Euro-Zeichen (z.B. "8,50 €")
-        let formatierterPreis = reinerPreis.toFixed(2).replace(".", ",") + " €";
-
-        // 3. Verpackt die Werte sicher für den Link
-        let prefillUrl = SEATABLE_FORM_URL + 
-                         "?prefill_Größe=" + encodeURIComponent(groesseText) + 
-                         "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
-                         "&prefill_Preis=" + encodeURIComponent(formatierterPreis);
-
-        // Öffnet das Formular perfekt ausgefüllt in einem neuen Browser-Tab
-        window.open(prefillUrl, '_blank');
-    }
-
-</script>
-
-
+     
 </body>
 </html>
