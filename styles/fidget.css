@@ -25,20 +25,20 @@ select {
 }
 
 h1 {
-    color: #0077b6;
+    color: purple;
 }
 
 .price-tag {
     font-size: 24px;
     font-weight: bold;
-    color: #00b4d8;
+    color: purple;
     margin: 15px 0;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background: #0077b6;
+    background: purple;
     color: white;
     border: none;
     border-radius: 5px;
@@ -47,6 +47,9 @@ button {
     cursor: pointer;
 }
 
+    button:hover {
+        background-color: mediumpurple;
+    }
 
 /* Container für das sichere SeaTable-Formular */
 #briefkasten-container {
@@ -62,33 +65,3 @@ iframe {
     border: none;
     border-radius: 8px;
 }
-
-#btn-oktopus {
-    background-color: orange;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-    #btn-oktopus:hover {
-        background-color: #FFB733;
-    }
-
-#btn-fidget {
-    background-color: rebeccapurple;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 10px;
-}
-
-    #btn-fidget:hover {
-        background-color: mediumpurple;
-    }
-        

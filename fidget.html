@@ -1,0 +1,38 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Fidget Clicker</title>
+    <link rel="stylesheet" href="styles/fidget.css">
+</head>
+<body>
+    <div class="card">
+        <h1>Fidget Clicker Konfigurator</h1>
+        <p>Wähle deine bevorzugte Fidget Clicker Variante aus:</p>
+
+        <label for="color" style="display:block; text-align:left;">Farbe:</label>
+        <select id="color">
+            <option value="black">Schwarz</option>
+            <option value="white">Weiß</option>
+            <option value="red">Rot</option>
+        </select>
+
+        <label for="deliverytime" style="display:block; text-align:left;">Lieferzeit:</label>
+        <select id="deliverytime" onchange="berechnePreis()">
+            <option value="normal">Normal (3-5 Werktage)</option>
+            <option value="express">Express (1-2 Werktage) (+2,00 €)</option>
+        </select>
+
+        <div class="price-tag">Preis: <span id="finaler-preis">3,00</span> €</div>
+
+        <button id="btn-bestellen" onclick="oeffneBriefkasten()">Auswahl bestätigen & Kontaktdaten eingeben</button>
+
+        <!-- Das eingebettete SeaTable-Formular -->
+        <div id="briefkasten-container">
+            <iframe id="seatable-form" src=""></iframe>
+        </div>
+    </div>
+
+    <script src="scripts/fidget.js"></script>
+
+</body>
+</html>
