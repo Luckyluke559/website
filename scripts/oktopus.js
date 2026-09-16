@@ -25,7 +25,7 @@
         // 3. Verpackt die Werte sicher für den Link
             let prefillUrl = SEATABLE_FORM_URL + 
                          "?prefill_Produkt=" + encodeURIComponent("Oktopus") +
-                         "?prefill_Größe=" + encodeURIComponent(groesseText) + 
+                         "&prefill_Größe=" + encodeURIComponent(groesseText) + 
                          "&prefill_Farbe=" + encodeURIComponent(farbeText) + 
                          "&prefill_Lieferzeit=" + encodeURIComponent(lieferzeitText) + 
                          "&prefill_Preis=" + encodeURIComponent(formatierterPreis);

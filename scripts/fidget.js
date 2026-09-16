@@ -22,7 +22,7 @@ function oeffneBriefkasten() {
     // 3. Verpackt die Werte sicher für den Link
     let prefillUrl = SEATABLE_FORM_URL +
         "?prefill_Produkt=" + encodeURIComponent("Fidget Clicker") +
-        "?prefill_Größe=" + encodeURIComponent("Standard") +  // Da es keine Größenoptionen gibt, setzen wir "Standard""
+        "&prefill_Größe=" + encodeURIComponent("Standard") +  // Da es keine Größenoptionen gibt, setzen wir "Standard""
         "&prefill_Farbe=" + encodeURIComponent(farbeText) +
         "&prefill_Lieferzeit=" + encodeURIComponent(lieferzeitText) +
         "&prefill_Preis=" + encodeURIComponent(formatierterPreis);
